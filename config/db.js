@@ -1,8 +1,10 @@
+const dotenv = require("dotenv")
+dotenv.config()
+
 const mongoose = require("mongoose")
-const MONGO_URI = 'mongodb+srv://Uday:MqKT6VMJVYox5vh5@attainurgoal.hhhxh.mongodb.net/employeedb?retryWrites=true&w=majority'
 
 exports.connectDB = ()=>{
-    mongoose.connect(MONGO_URI,
+    mongoose.connect(process.env.MONGO_URI,
     {
         useUnifiedTopology: true,
         useNewUrlParser: true
