@@ -1,5 +1,6 @@
-const books = require("../model/model")
+const mongoose = require("mongoose")
 const booksModel = require("../model/model")
+const {connectDB} = require("../config/db")
 
 exports.createBooks = async (req, res)=>{
     const body = req.body
@@ -20,9 +21,16 @@ exports.createBooks = async (req, res)=>{
 }
 
 exports.findBooks = async (req, res)=>{
+    var collection1 = ""    
+    mongoose.connection.db.listCollections().toArray(function(err, collections){
+        var result = collections[0].name
+        collection1 = result
+    })
+    
     try{
         const books = await booksModel.find()
         res.send({
+            myCollection: collection1,
             data: books,
             status: "success"
 
